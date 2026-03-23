@@ -29,7 +29,7 @@ import logging
 
 # ==================== НАСТРОЙКИ ====================
 # Telegram Bot Token (получить у @BotFather)
-BOT_TOKEN = "8658828172:AAFwNxQeYD8sq1T2VES-dNNo11rgKdz_H48"
+BOT_TOKEN = "8658828172:AAH3QLqzcihxUgVeYH5YoP2vbcwYA67MoRw"
 
 # ID администратора (узнать у @userinfobot)
 ADMIN_ID = 1425042067
