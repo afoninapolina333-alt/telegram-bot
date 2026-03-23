@@ -1567,7 +1567,31 @@ if __name__ == "__main__":
             print(f"❌ Ошибка: {e}")
             print("🔄 Переподключение через 15 секунд...")
             time.sleep(15)
+# ==================== ВЕБХУК ДЛЯ CYCLIC ====================
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    if request.headers.get('content-type') == 'application/json':
+        json_string = request.get_data().decode('utf-8')
+        update = telebot.types.Update.de_json(json_string)
+        bot.process_new_updates([update])
+        return 'OK', 200
+    return 'Bad Request', 400
 
+@app.route('/')
+def index():
+    return 'Bot is running!', 200
+
+# ==================== ЗАПУСК ====================
+if __name__ == "__main__":
+    # Удаляем старый webhook
+    bot.delete_webhook()
+    # Устанавливаем новый
+    webhook_url = os.environ.get("CYCLIC_URL", "") + "/webhook"
+    bot.set_webhook(url=webhook_url)
+    print(f"✅ Webhook set to {webhook_url}")
+    
+    # Запускаем Flask сервер
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
 
 
