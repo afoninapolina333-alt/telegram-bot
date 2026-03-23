@@ -1549,6 +1549,16 @@ if __name__ == "__main__":
     print("✅ Бот готов к работе!")
     print("=" * 50)
 
+# ВАЖНО: Удаляем webhook перед запуском
+    try:
+        bot.delete_webhook()
+        print("✅ Webhook удален")
+    except Exception as e:
+        print(f"⚠️ Ошибка при удалении webhook: {e}")
+    
+    print("✅ Бот готов к работе!")
+    print("=" * 50)
+    
     while True:
         try:
             bot.infinity_polling(timeout=60, long_polling_timeout=60)
